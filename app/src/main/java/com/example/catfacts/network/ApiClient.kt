@@ -8,7 +8,8 @@ class ApiClient {
         private var retrofit: Retrofit? = null
         fun getRetrofit(): Retrofit? {
             if(retrofit == null){
-                retrofit = Retrofit.Builder().baseUrl("https://cat-fact.herokuapp.com").addConverterFactory(GsonConverterFactory.create()).build()
+                retrofit = Retrofit.Builder().baseUrl("https://cat-fact.herokuapp.com")
+                    .addConverterFactory(GsonConverterFactory.create()).build()
             }
             return retrofit
         }

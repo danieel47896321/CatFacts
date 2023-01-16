@@ -1,6 +1,6 @@
 package com.example.catfacts.api
 
-data class CatJson(
+data class CatModel(
     val __v: Int,
     val _id: String,
     val createdAt: String,
