@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CatFacts</string>
+    <string name="Fact">Fact</string>
+    <string name="GetFact">Get Fact</string>
 </resources>
