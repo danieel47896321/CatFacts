@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catfacts.adapter.MainAdapter
 import com.example.catfacts.api.CatModel
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 if(fact != null){
                     factList.add(fact)
                     mainAdapter.notifyItemRangeInserted(currentSize, factList.size)
+                    recyclerView.smoothScrollToPosition(factList.size-1)
                 }
             }
         }
