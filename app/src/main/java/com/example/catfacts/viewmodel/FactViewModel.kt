@@ -7,7 +7,9 @@ import com.example.catfacts.repository.FactRepository
 
 class FactViewModel: ViewModel() {
     private var factRepository = FactRepository()
+    private var factList = ArrayList<CatModel>()
     fun getFact(): LiveData<CatModel>{
         return factRepository.getFact()
     }
+    fun getList(): ArrayList<CatModel> { return factList }
 }

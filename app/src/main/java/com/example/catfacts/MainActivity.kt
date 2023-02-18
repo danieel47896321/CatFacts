@@ -6,10 +6,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catfacts.adapter.MainAdapter
-import com.example.catfacts.api.CatModel
 import com.example.catfacts.viewmodel.FactViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var buttonGetFact: Button
     private lateinit var progressBar: ProgressBar
-    private var factList = ArrayList<CatModel>()
-    private var mainAdapter: MainAdapter = MainAdapter(factList)
+    private lateinit var mainAdapter: MainAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         buttonGetFact = findViewById(R.id.buttonGetFact)
         progressBar = findViewById(R.id.progressBar)
+        mainAdapter = MainAdapter(factViewModel.getList())
         recyclerView.adapter = mainAdapter
         buttonGetFact()
     }
@@ -36,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         buttonGetFact.setOnClickListener {
             progressBar.visibility = View.VISIBLE
             factViewModel.getFact().observe(this){ fact ->
-                val currentSize = factList.size
+                val currentSize = factViewModel.getList().size
                 progressBar.visibility = View.GONE
                 if(fact != null){
-                    factList.add(fact)
-                    mainAdapter.notifyItemRangeInserted(currentSize, factList.size)
-                    recyclerView.smoothScrollToPosition(factList.size-1)
+                    factViewModel.getList().add(fact)
+                    mainAdapter.notifyItemRangeInserted(currentSize, factViewModel.getList().size)
+                    recyclerView.smoothScrollToPosition(factViewModel.getList().size-1)
                 }
             }
         }
